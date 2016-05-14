@@ -1,0 +1,8 @@
+emails_to_notify: 
+  - example@notify.com
+  - example2@notify.com
+
+smtp_settings:
+  host: smtp.example.com
+  port: 587
+  from: '<Estate Crawler>crawler@example.com'

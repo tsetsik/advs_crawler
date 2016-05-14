@@ -1,0 +1,8 @@
+AllCops:
+  TargetRubyVersion: 2.2
+  Include:
+    - '**/Rakefile'
+Documentation:
+  Enabled: false
+Metrics/LineLength:
+  Max: 99
