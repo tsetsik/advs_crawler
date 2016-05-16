@@ -11,13 +11,11 @@ class LeboncoinAdapter < BaseAdapter
   end
 
   def query_params
-    {
-      sp:       1,
+    { sp:       1,
       ps:       4,
       pe:       16,
       th:       1,
-      location: 'Lambersart+59130,Wambrechies+59118,Quesnoy-sur-Deûle+59890'
-    }
+      location: 'Lambersart+59130,Wambrechies+59118,Quesnoy-sur-Deûle+59890' }
   end
 
   private

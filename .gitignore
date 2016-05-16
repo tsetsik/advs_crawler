@@ -9,6 +9,9 @@
 /.capistrano
 /.DS_Store
 
+# Ignor sqlite db
+/estate_crawler.db
+
 # Ignore all logfiles and tempfiles.
 /.byebug_history
 /screenshots

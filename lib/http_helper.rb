@@ -1,9 +1,6 @@
 module HttpHelper
   def visit(url:, query_params:)
     uri = build_uri(url: url, query_params: query_params)
-
-    puts "\n\n #{yield(uri)} - yield(uri) \n\n"
-
     Net::HTTP.get_response(block_given? ? yield(uri) : uri)
   end
 
