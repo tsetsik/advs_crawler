@@ -6,7 +6,7 @@ class LeboncoinAdapter < BaseAdapter
 
     Array.new(total_pages(page)) do |p|
       page = noko_parse(visit_page((p + 1))) if p > 0
-      page_addvs(page)
+      page_advs(page)
     end
   end
 
@@ -27,29 +27,29 @@ class LeboncoinAdapter < BaseAdapter
     p.css('a#last').attr('href').value.match(/o=(\d+)/)[1].to_i
   end
 
-  def page_addvs(page)
-    page.css('ul.tabsContent.dontSwitch.block-white li').map do |addv|
-      addv_info(addv)
+  def page_advs(page)
+    page.css('ul.tabsContent.dontSwitch.block-white li').map do |adv|
+      adv_info(adv)
     end
   end
 
-  def addv_info(addv)
-    link = addv.css('a')
+  def adv_info(adv)
+    link = adv.css('a')
     { id: link.attr('href').value.match(%r{\/(\d+).htm})[1],
       title: link.attr('title').value,
-      img: addv_img(addv),
+      img: adv_img(adv),
       price: link.css('h3.item_price').text,
-      description: addv_location(addv) }
+      description: adv_location(adv) }
   end
 
-  def addv_img(addv)
-    "http:#{addv.css('a').css('span.lazyload').attr('data-imgsrc')}"
+  def adv_img(adv)
+    "http:#{adv.css('a').css('span.lazyload').attr('data-imgsrc')}"
   rescue NoMethodError
     'https://static.leboncoin.fr/img/no-picture.png'
   end
 
-  def addv_location(addv)
-    addv.css('p.item_supp')[1]
+  def adv_location(adv)
+    adv.css('p.item_supp')[1]
       .text
       .strip
       .encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')

@@ -7,19 +7,19 @@ class Sqlite
     init_tables
   end
 
-  def find_addv(adapter, id)
+  def find_adv(adapter, id)
     db.results_as_hash = true
-    db.execute('SELECT * FROM addvs WHERE adapter = ? AND id = ?', [adapter.to_s, id.to_s])[0]
+    db.execute('SELECT * FROM advs WHERE adapter = ? AND id = ?', [adapter, id])[0]
   end
 
-  def add_addv(adapter, addv)
-    # data = addv.symbolize_keys.slice(:price, :id).merge(adapter: adapter)
-    # db.execute('UPDATE addvs SET price = :price WHERE adapter = :adapter AND id = :id', data)
+  def add_adv(adapter, adv)
+    data = adv.merge(adapter: adapter)
+    db.execute("INSERT INTO advs (#{data.keys.join(',')}) VALUES(:#{data.keys.join(', :')})", data)
   end
 
-  def update_addv(adapter, addv)
-    data = addv.symbolize_keys.slice(:price, :id).merge(adapter: adapter)
-    db.execute('UPDATE addvs SET price = :price WHERE adapter = :adapter AND id = :id', data)
+  def update_adv(adapter, adv)
+    data = adv.symbolize_keys.slice(:price, :id).merge(adapter: adapter)
+    db.execute('UPDATE advs SET price = :price WHERE adapter = :adapter AND id = :id', data)
   end
 
   private
@@ -28,7 +28,7 @@ class Sqlite
 
   def init_tables
     db.execute <<-SQL
-      CREATE TABLE IF NOT EXISTS addvs (
+      CREATE TABLE IF NOT EXISTS advs (
         id int,
         adapter varchar(30),
         title varchar(80),
