@@ -20,12 +20,11 @@ class Proccessor
   private
 
   def proccess_adapters
-    addvs = @adapters.inject({}) do |buffer, adapter|
-      buffer.merge(adapter.class => adapter.proccess.flatten)
+    advs = @adapters.inject({}) do |buffer, adapter|
+      buffer.merge(adapter.class.to_s => adapter.proccess.flatten)
     end
 
-    @diff_watcher.new(addvs).call
-    []
+    @to_notify += @diff_watcher.new(advs).call
   end
 
   def notify_sender
