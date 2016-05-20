@@ -23,7 +23,7 @@ class DiffWatchService
   end
 
   def save_change(adapter, db_adv, adv)
-    return db.update_adv(adapter, db_adv) if db_adv.present?
+    return db.update_adv(adapter, adv) if db_adv.present?
     db.add_adv(adapter, adv)
   end
 
