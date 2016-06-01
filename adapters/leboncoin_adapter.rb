@@ -28,7 +28,7 @@ class LeboncoinAdapter < BaseAdapter
   end
 
   def page_advs(page)
-    page.css('ul.tabsContent.dontSwitch.block-white li').map do |adv|
+    page.css('ul.dontSwitch li').map do |adv|
       adv_info(adv)
     end
   end
@@ -36,6 +36,8 @@ class LeboncoinAdapter < BaseAdapter
   def adv_info(adv)
     link = adv.css('a')
     { id: link.attr('href').value.match(%r{\/(\d+).htm})[1],
+      site: 'leboncoin.fr',
+      link: link.attr('href').value,
       title: link.attr('title').value,
       img: adv_img(adv),
       price: link.css('h3.item_price').text,
