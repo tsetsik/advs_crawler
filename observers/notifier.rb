@@ -4,7 +4,7 @@ class Notifier
     proccessor.add_observer(self)
   end
 
-  def update(to_notify)
-    puts "\n\n #{to_notify} - to_notify \n\n"
+  def update(advs)
+    NotifyMailer.new(@mail_settings, advs.flatten).deliver
   end
 end

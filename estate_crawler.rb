@@ -5,7 +5,7 @@ require 'yaml'
 require 'active_support/inflector'
 require 'byebug'
 
-require_all 'lib', 'db', 'adapters', 'observers', 'services'
+require_all 'lib', 'db', 'adapters', 'observers', 'services', 'mailers'
 
 mail_settings = YAML.load_file('config/notifier.yml')
 
