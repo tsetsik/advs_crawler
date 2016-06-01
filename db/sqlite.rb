@@ -13,7 +13,7 @@ class Sqlite
   end
 
   def add_adv(adapter, adv)
-    data = adv.merge(adapter: adapter)
+    data = adv.except(:site, :link).merge(adapter: adapter)
     db.execute("INSERT INTO advs (#{data.keys.join(',')}) VALUES(:#{data.keys.join(', :')})", data)
   end
 
