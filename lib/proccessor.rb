@@ -14,7 +14,7 @@ class Proccessor
   end
 
   def run
-    notify_sender if proccess_adapters.length > 0
+    notify_sender if proccess_adapters.flatten.length > 0
   end
 
   private
