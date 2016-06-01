@@ -1,0 +1,16 @@
+- @advs.each do |a|
+  div style="margin-bottom:10px"
+    p In site #{a[:site]} with action: #{a[:action]}
+
+    p
+      a href="#{a[:link]}"
+        - if a[:action] == :changed_price
+          | #{a[:old_price]} -> #{a[:price]}
+        - else
+          = a[:price]
+
+    p = a[:description]
+    
+    p
+      a href="#{a[:link]}"
+        img src="#{a[:img]}"
