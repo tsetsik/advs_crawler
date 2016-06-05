@@ -9,3 +9,4 @@ gem 'byebug', group: :development
 gem 'sqlite3'
 gem 'mail'
 gem 'slim'
+gem 'httparty'
