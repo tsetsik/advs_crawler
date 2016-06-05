@@ -10,6 +10,8 @@ class LeboncoinAdapter < BaseAdapter
     end
   end
 
+  private
+
   def query_params
     { sp:       1,
       ps:       4,
@@ -17,8 +19,6 @@ class LeboncoinAdapter < BaseAdapter
       th:       1,
       location: 'Lambersart+59130,Wambrechies+59118,Quesnoy-sur-Deûle+59890' }
   end
-
-  private
 
   def total_pages(page)
     p = page.css('div.pagination_links_container')
