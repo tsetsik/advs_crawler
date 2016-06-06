@@ -1,10 +1,9 @@
-require 'curb'
-
 class SelogerAdapter < BaseAdapter
   URL = 'http://www.seloger.com/list.htm?ci=590328,590482,590636'.freeze
 
   def proccess
     page = noko_parse(visit_page)
+
     Array.new(total_pages(page)) do |p|
       page = noko_parse(visit_page((p + 1))) if p > 0
       page_advs(page)
@@ -38,9 +37,9 @@ class SelogerAdapter < BaseAdapter
   def adv_info(adv)
     { id: adv.attr('data-listing-id'),
       site: 'seloger.com',
-      link: adv.css('div.listing_photo_container a').attr('href'),
-      img: adv.css('div.listing_photo_container img').attr('src'),
-      title: adv.css('div.listing_infos h2 a').attr('title'),
+      link: adv.css('div.listing_photo_container a').attr('href').value,
+      img: adv.css('div.listing_photo_container img').attr('src').value,
+      title: adv.css('div.listing_infos h2 a').attr('title').value,
       price: adv.css('a.amount').text.gsub(/<\/?[^>]*>/, ''),
       description: adv.css('p.description').text }
   end

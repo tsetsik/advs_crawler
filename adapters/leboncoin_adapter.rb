@@ -28,7 +28,7 @@ class LeboncoinAdapter < BaseAdapter
   end
 
   def page_advs(page)
-    page.css('ul.dontSwitch li').map do |adv|
+    page.css('section.tabsContent ul li').map do |adv|
       adv_info(adv)
     end
   end
