@@ -3,7 +3,7 @@ require 'observer'
 class Proccessor
   include Observable
 
-  def initialize(diff_watcher: DiffWatchService)
+  def initialize(diff_watcher)
     @adapters = []
     @to_notify = []
     @diff_watcher = diff_watcher
@@ -21,10 +21,10 @@ class Proccessor
 
   def proccess_adapters
     advs = @adapters.inject({}) do |buffer, adapter|
-      buffer.merge(adapter.class.to_s => adapter.proccess.flatten)
+      buffer.merge(adapter.class.name => adapter.proccess.flatten)
     end
 
-    @to_notify += @diff_watcher.new(advs).call
+    @to_notify += @diff_watcher.call(advs)
   end
 
   def notify_sender
