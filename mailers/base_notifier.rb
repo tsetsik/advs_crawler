@@ -5,12 +5,11 @@ class BaseNotifier < Mail::Message
   def initialize(mail_settings, recipients = nil)
     @settings = mail_settings.deep_symbolize_keys
 
-    set_mail_defaults
+    set_mail_settings
     super do
       from @settings.fetch(:smtp_settings).fetch(:from).to_s
       to Array(recipients).join(',') if recipients.present?
       self.subject = subject
-      # subject 'New/Changed addvertisements for you'
 
       self.text_part = output_text
       self.html_part = output_html
@@ -36,10 +35,17 @@ class BaseNotifier < Mail::Message
     Slim::Template.new(tmpl_file, {}).render(self)
   end
 
-  def set_mail_defaults
-    defaults = @settings.fetch(:smtp_settings).except(:from)
-    Mail.defaults do
-      delivery_method(:smtp, defaults)
+  def set_mail_settings
+    delivery_method = @settings.fetch(:delivery_method)
+
+    case delivery_method
+    when 'smtp'
+      smtp_info = @settings.fetch(:smtp_settings).except(:from)
+      Mail.defaults { delivery_method(:smtp, smtp_info) }
+    when 'sendmail'
+      Mail.defaults { delivery_method(:sendmail) }
+    else
+      fail(NotImplementedError, 'Not implemented mail method')
     end
   end
 end
