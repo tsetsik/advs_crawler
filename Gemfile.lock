@@ -8,6 +8,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    ast (2.2.0)
     byebug (9.0.4)
     capybara (2.7.1)
       addressable
@@ -38,15 +39,26 @@ GEM
     multi_xml (0.5.5)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    parser (2.3.0.1)
+      ast (~> 2.2)
     poltergeist (1.8.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
+    powerpack (0.1.1)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rainbow (2.0.0)
     require_all (1.3.3)
+    rubocop (0.36.0)
+      parser (>= 2.3.0.0, < 3.0)
+      powerpack (~> 0.1)
+      rainbow (>= 1.99.1, < 3.0)
+      ruby-progressbar (~> 1.7)
+    ruby-progressbar (1.7.5)
+    shoulda-context (1.2.1)
     slim (3.0.7)
       temple (~> 0.7.6)
       tilt (>= 1.3.3, < 2.1)
@@ -78,6 +90,8 @@ DEPENDENCIES
   minitest
   nokogiri
   require_all
+  rubocop
+  shoulda-context
   slim
   sqlite3
   webshot
