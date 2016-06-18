@@ -37,7 +37,7 @@ class LeboncoinAdapter < BaseAdapter
     link = adv.css('a')
     { id: link.attr('href').value.match(%r{\/(\d+).htm})[1],
       site: 'leboncoin.fr',
-      link: link.attr('href').value,
+      link: "http:#{link.attr('href').value}",
       title: link.attr('title').value,
       img: adv_img(adv),
       price: link.css('h3.item_price').text,

@@ -3,7 +3,7 @@ require 'observer'
 class DiffWatchService
   include Observable
 
-  def initialize(db = Sqlite.new('estate_crawler.db'))
+  def initialize(db = Sqlite.new)
     @db = db
   end
 
