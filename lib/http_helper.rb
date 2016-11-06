@@ -10,7 +10,7 @@ module HttpHelper
 
   def req_headers
     {
-      'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36',
+      'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/600.7.12 (KHTML, like Gecko) Version/10.0.1 Safari/600.7.12',
       'Accept' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
       'Accept-Language' => 'en-US,en;q=0.8',
       'Accept-Encoding' => 'gzip, deflate, sdch',

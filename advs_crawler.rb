@@ -7,7 +7,8 @@ require 'byebug'
 
 require_all 'lib', 'db', 'adapters', 'observers', 'services', 'mailers'
 
-mail_settings = YAML.load_file('config/notifier.yml')
+mail_settings = Config.new('notifier').parse
+adapter_settings = Config.new('adapters').parse
 
 diff_watcher = DiffWatchService.new
 proccessor = Proccessor.new(diff_watcher)
@@ -17,7 +18,8 @@ DesignChangesNotifier.new(diff_watcher, mail_settings.except(:emails_to_notify))
 
 Dir['adapters/*'].each do |f|
   adapter = File.basename(f, '.rb').classify.constantize
-  proccessor.add_adapter(adapter.new)
+  proccessor.add_adapter(adapter.new) if adapter_settings[:execute_adapters].nil? ||
+                                         adapter_settings[:execute_adapters].include?(adapter.to_s)
 end
 
 proccessor.run

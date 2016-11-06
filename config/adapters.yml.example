@@ -1,0 +1,3 @@
+execute_adapters:
+  - AdapterOne
+  - AdapterTwo

@@ -10,9 +10,10 @@
 /.DS_Store
 
 # Ignor sqlite db
-/estate_crawler.db
+/advs_crawler.db
 
 # Ignore all logfiles and tempfiles.
 /.byebug_history
 /screenshots
 config/notifier.yml
+config/adapters.yml

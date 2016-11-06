@@ -1,7 +1,7 @@
 require 'sqlite3'
 
 class Sqlite
-  def initialize(db = SQLite3::Database.new('estate_crawler.db'))
+  def initialize(db = SQLite3::Database.new('advs_crawler.db'))
     @db = db
     # Create tables if don't exists
     init_tables

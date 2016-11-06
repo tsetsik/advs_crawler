@@ -5,9 +5,9 @@
     p
       a href="#{a[:link]}"
         - if a[:action] == :changed_price
-          | #{a[:old_price]} -> #{a[:price]}
+          | #{a[:title]} - #{a[:old_price]} -> #{a[:price]}
         - else
-          = a[:price]
+          | #{a[:title]} - #{a[:price]}
 
     p = a[:description]
     
