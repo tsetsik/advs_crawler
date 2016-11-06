@@ -7,8 +7,8 @@ require 'byebug'
 
 require_all 'lib', 'db', 'adapters', 'observers', 'services', 'mailers'
 
-mail_settings = Config.new('notifier').parse
-adapter_settings = Config.new('adapters').parse
+mail_settings = YmlConfig.new('notifier').parse
+adapter_settings = YmlConfig.new('adapters').parse
 
 diff_watcher = DiffWatchService.new
 proccessor = Proccessor.new(diff_watcher)

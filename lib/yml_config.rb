@@ -1,4 +1,4 @@
-class Config
+class YmlConfig
   def initialize(file)
     @file = file
     fail "Config file #{file} is not found" unless config_exists?
