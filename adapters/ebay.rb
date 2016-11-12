@@ -30,6 +30,7 @@ class Ebay < BaseAdapter
 
   def img(adv)
     img = adv.css('img.img')
+    return unless img.present?
     img.attr('imgurl') || img.attr('src')
   end
 
