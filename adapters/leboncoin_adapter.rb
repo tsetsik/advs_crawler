@@ -2,23 +2,20 @@ class LeboncoinAdapter < BaseAdapter
   URL = 'https://www.leboncoin.fr/ventes_immobilieres/offres/nord_pas_de_calais/nord/'.freeze
 
   def proccess
-    page = noko_parse(visit_page)
+    searches.map do |search|
+      @query_params = search
 
-    Array.new(total_pages(page)) do |p|
-      page = noko_parse(visit_page((p + 1))) if p > 0
-      page_advs(page)
+      page = noko_parse(visit_page)
+      Array.new(total_pages(page)) do |p|
+        page = noko_parse(visit_page((p + 1))) if p > 0
+        page_advs(page)
+      end
     end
   end
 
   private
 
-  def query_params
-    { sp:       1,
-      ps:       4,
-      pe:       16,
-      th:       1,
-      location: 'Lambersart+59130,Wambrechies+59118,Quesnoy-sur-Deûle+59890' }
-  end
+  attr_reader :query_params
 
   def total_pages(page)
     p = page.css('div.pagination_links_container')

@@ -1,7 +1,5 @@
-class Olx < BaseAdapter
+class OlxAdapter < BaseAdapter
   def proccess
-    puts "\n\n Proccess olx adapter \n\n"
-
     # page = noko_parse(visit_page)
 
     # Array.new(total_pages(page)) do |p|

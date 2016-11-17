@@ -2,24 +2,20 @@ class SelogerAdapter < BaseAdapter
   URL = 'http://www.seloger.com/list.htm?ci=590328,590482,590636'.freeze
 
   def proccess
-    page = noko_parse(visit_page)
+    searches.map do |search|
+      @query_params = search
+      page = noko_parse(visit_page)
 
-    Array.new(total_pages(page)) do |p|
-      page = noko_parse(visit_page((p + 1))) if p > 0
-      page_advs(page)
+      Array.new(total_pages(page)) do |p|
+        page = noko_parse(visit_page((p + 1))) if p > 0
+        page_advs(page)
+      end
     end
   end
 
   private
 
-  def query_params
-    { idtt:         2,
-      idtypebien:   '13,14,2,4',
-      pxmax:        '450000',
-      pxmin:        '125000',
-      tri:        'a_px',
-      ci:           '590328,590482,590636' }
-  end
+  attr_reader :query_params
 
   def total_pages(page)
     p = page.css('p.pagination_result_number')

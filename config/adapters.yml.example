@@ -1,3 +1,31 @@
 execute_adapters:
   - AdapterOne
   - AdapterTwo
+
+searches:
+  LeboncoinAdapter:
+    -
+      sp:       1
+      ps:       4
+      pe:       16
+      th:       1
+      location: 'Lambersart+59130,Wambrechies+59118,Quesnoy-sur-Deûle+59890'
+
+  SelogerAdapter:
+    -
+      idtt:         2
+      idtypebien:   '13,14,2,4'
+      pxmax:        '450000'
+      pxmin:        '125000'
+      tri:          'a_px'
+      ci:           '590328,590482,590636'
+
+  EbayAdapter:
+    -
+      id: adv.attr('listingid').to_s
+      site: 'ebay.co.uk'
+      link: adv.css('div:first.lvpic a').attr('href').to_s
+      title: adv.css('h3.lvtitle a').text
+      img: img(adv).to_s
+      price: adv.css('ul.lvprices li.lvprice span').text
+      description: "shipping: #{adv.css('ul.lvprices li.lvshipping span').text}"

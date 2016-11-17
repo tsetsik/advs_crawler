@@ -18,8 +18,11 @@ DesignChangesNotifier.new(diff_watcher, mail_settings.except(:emails_to_notify))
 
 Dir['adapters/*'].each do |f|
   adapter = File.basename(f, '.rb').classify.constantize
-  proccessor.add_adapter(adapter.new) if adapter_settings[:execute_adapters].nil? ||
-                                         adapter_settings[:execute_adapters].include?(adapter.to_s)
+  next if adapter_settings[:run_adapters].present? &&
+          adapter_settings[:run_adapters].exclude?(adapter.to_s)
+
+  adapter_searches = adapter_settings[:searches].fetch(adapter.to_s.to_sym, [])
+  proccessor.add_adapter(adapter.new(adapter_searches))
 end
 
 proccessor.run
