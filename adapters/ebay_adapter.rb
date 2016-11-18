@@ -8,7 +8,7 @@ class EbayAdapter < BaseAdapter
       page = noko_parse(visit_page(search))
       Array.new(total_pages(page)) do |p|
         page = noko_parse(visit_page((p + 1))) if p > 0
-        page_advs(page)
+        page_advs(page).compact
       end
     end
   end
@@ -19,7 +19,7 @@ class EbayAdapter < BaseAdapter
 
   def page_advs(page)
     page.css('ul#ListViewInner li.sresult').map do |adv|
-      adv_info(adv)
+      adv_info(adv) if key_in_title?(adv)
     end
   end
 
@@ -34,7 +34,11 @@ class EbayAdapter < BaseAdapter
   end
 
   def title(adv)
-    adv.css('h3.lvtitle a').text + " - from search #{query_params[:_nkw]}"
+    adv.css('h3.lvtitle a').text
+  end
+
+  def key_in_title?(adv)
+    title(adv).scan(/#{query_params[:_nkw]}/i).any?
   end
 
   def img(adv)
