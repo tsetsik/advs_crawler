@@ -58,7 +58,7 @@ class LeboncoinAdapter < BaseAdapter
   def visit_page(page_num = 1)
     visit(url: URL, query_params: query_params.merge(o: page_num)) do |uri|
       uri.tap do |u|
-        u.query = u.query.gsub('%2B', '+').gsub('%C3%BB', '%FB')
+        u.query = u.query.gsub('%2B', '+').gsub('%C3%BB', '%FB').gsub('%C3%A9', '%E9')
         u.query << '&ret=1&ret=3'
       end
     end
